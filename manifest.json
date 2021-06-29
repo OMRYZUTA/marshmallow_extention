@@ -1,0 +1,15 @@
+{
+    "name": "Save Position",
+    "description": "Save a poistion",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "icons": {
+        "128": "/images/icon128.png"
+    },
+    "action": {
+        "default_popup": "popup.html"
+    }
+}

@@ -8,10 +8,41 @@ savePositionButton.addEventListener("click", async () => {
     });
 })
 
+
 function savePositionNow() {
-    const queryString = String(window.location.href);
-    const jobkeyIndex = queryString.indexOf('jk');
-    const jobkey = queryString.substring(jobkeyIndex + 3);
-    console.log(jobkey);
-    // let jobKeyToSend = document.getElementById("")
+    const initLinkedingWebsiteIDs = () => {
+        return {};
+    }
+    const initIndeedWebsiteIDs = () => {
+        const websiteTags = {};
+        websiteTags["job_title"] = "vjs-jobtitle";
+        websiteTags["company_name"] = "vjs-cn";
+        websiteTags["city"] = "vjs-loc";
+        return websiteTags;
+    }
+    const getWebsiteIds = () => {
+        const queryString = String(window.location.href);
+        let websiteTags;
+        if (queryString.indexOf("linkedin.com") != -1) {
+            websiteTags = initLinkedingWebsiteIDs();
+        }
+        else if (queryString.indexOf("indeed.com") != -1) {
+            websiteTags = initIndeedWebsiteIDs();
+        }
+        return websiteTags;
+    }
+    const scrapeJobProcess = (websiteIDs) => {
+        const jobProcess = {};
+        jobProcess["position"] = {};
+        jobProcess.position["company_name"] = document.getElementById(websiteIDs["company_name"]).innerText;
+        jobProcess.position["job_title"] = document.getElementById(websiteIDs["job_title"]).innerText;
+        jobProcess.position["city"] = document.getElementById(websiteIDs["city"]).innerText;
+        return jobProcess;
+    }
+
+    const websiteIDs = getWebsiteIds();
+    const jobProcess = scrapeJobProcess(websiteIDs);
+    console.log(jobProcess);
 }
+
+

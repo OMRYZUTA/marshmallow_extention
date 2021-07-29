@@ -37,9 +37,10 @@ function savePositionNow() {
         jobProcess.position["company_name"] = document.getElementById(websiteIDs["company_name"]).innerText;
         jobProcess.position["job_title"] = document.getElementById(websiteIDs["job_title"]).innerText;
         jobProcess.position["city"] = document.getElementById(websiteIDs["city"]).innerText;
+        jobProcess.position["job_posting_URL"] = String(window.location.href);
         return jobProcess;
     }
-
+    //in order to scrape a position for a new site, we only need define its relevent tags
     const websiteIDs = getWebsiteIds();
     const jobProcess = scrapeJobProcess(websiteIDs);
     console.log(jobProcess);

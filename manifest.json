@@ -25,7 +25,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://.linkedin.com/*"],
+      "matches": ["*://*.linkedin.com/*", "*://*.indeed.com/*"],
       "js": ["contentScript.js"]
     }
   ]

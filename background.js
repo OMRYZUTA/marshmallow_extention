@@ -10,7 +10,6 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
           chrome.storage.sync.get(['position'], function (result) {
             position = result;
           });
-          chrome.runtime.sendMessage(null, "fetched_position", null, null)
         }
       )
     }

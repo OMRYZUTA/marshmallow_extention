@@ -17,14 +17,13 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 }
 )
 chrome.runtime.onMessage.addListener(function (request) {
-  console.log("now need to send to server -", request);
   let appProcess = {}
   appProcess["position"] = request;
   appProcess["status"] = { name: "Interested" };
   appProcess["contact_set"] = [];
   appProcess["stage_set"] = [];
   appProcess["user_id"] = 2;
-  console.log('app pro: ' + appProcess);
+  console.log('app pro: ' + { appProcess });
   postData('http://127.0.0.1:8000/', appProcess)
     .then(data => {
       console.log(data); // JSON data parsed by `data.json()` call

@@ -12,8 +12,10 @@ const scrape = () => {
             if (typeof job_title === "undefined") {
                 job_title = document.getElementById('vjs-jobtitle').innerText
                 company_name = document.getElementById("vjs-cn").innerText;
+                let city = document.getElementById("vjs-loc").innerText
+                let about_the_job = document.getElementById("vjs-desc").innerText;
                 let job_posting_URL = String(window.location.href);
-                position = { company_name, job_title, job_posting_URL };
+                position = { company_name, job_title, city, about_the_job, job_posting_URL };
                 console.log('position: ', position);
             }
             else {

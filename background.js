@@ -23,6 +23,7 @@ chrome.runtime.onMessage.addListener(function (request) {
   appProcess["status"] = { name: "Interested" };
   appProcess["contact_set"] = [];
   appProcess["stage_set"] = [];
+  appProcess["user_id"] = 2;
   console.log('app pro: ' + appProcess);
   postData('http://127.0.0.1:8000/', appProcess)
     .then(data => {

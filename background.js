@@ -16,6 +16,34 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   }
 }
 )
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request) {
   console.log("now need to send to server -", request);
+  let appProcess = {}
+  appProcess["position"] = request;
+  appProcess["status"] = { name: "Interested" };
+  appProcess["contact_set"] = [];
+  appProcess["stage_set"] = [];
+  console.log('app pro: ' + appProcess);
+  postData('http://127.0.0.1:8000/', appProcess)
+    .then(data => {
+      console.log(data); // JSON data parsed by `data.json()` call
+    });
 });
+
+async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    // mode: 'cors', // no-cors, *cors, same-origin
+    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    // credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}

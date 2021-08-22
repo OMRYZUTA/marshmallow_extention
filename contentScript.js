@@ -1,32 +1,32 @@
 chrome.runtime.onMessage.addListener((msg, sender, sendResopnse) => {
     sendResopnse(scrape());
 })
-let jobTitle = "";
-let url = String(window.location.href);
+let job_title = "";
+let job_posting_URL = String(window.location.href);
 let position = {};
 
 const scrape = () => {
-    if (url.includes("indeed")) {
-        if (url.includes("vjk") || url.includes("vjs")) {
-            jobTitle = document.getElementsByClassName("jobsearch-JobInfoHeader-title")[0]?.innerText.replace("- job post", "");
-            if (typeof jobTitle === "undefined") {
-                jobTitle = document.getElementById('vjs-jobtitle').innerText
-                companyName = document.getElementById("vjs-cn").innerText;
-                let url = String(window.location.href);
-                position = { companyName, jobTitle, url };
+    if (job_posting_URL.includes("indeed")) {
+        if (job_posting_URL.includes("vjk") || job_posting_URL.includes("vjs")) {
+            job_title = document.getElementsByClassName("jobsearch-JobInfoHeader-title")[0]?.innerText.replace("- job post", "");
+            if (typeof job_title === "undefined") {
+                job_title = document.getElementById('vjs-jobtitle').innerText
+                company_name = document.getElementById("vjs-cn").innerText;
+                let job_posting_URL = String(window.location.href);
+                position = { company_name, job_title, job_posting_URL };
                 console.log('position: ', position);
             }
             else {
-                position = { jobTitle };
-                companyName = document.getElementsByClassName("jobsearch-InlineCompanyRating")[0].innerText;
-                console.log(companyName);
-                let url = String(window.location.href);
-                position = { companyName, jobTitle, url };
+                position = { job_title };
+                company_name = document.getElementsByClassName("jobsearch-InlineCompanyRating")[0].innerText;
+                console.log(company_name);
+                let job_posting_url = String(window.location.href);
+                position = { company_name, job_title, job_posting_url };
                 console.log('position: ', position);
             }
         }
     }
-    else if (url.includes("linkedin")) {
+    else if (job_posting_URL.includes("linkedin")) {
         console.log("in linkedin");
     }
     return position;

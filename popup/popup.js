@@ -14,4 +14,5 @@ chrome.storage.sync.get(['position'], function (positionWrapper) {
 })
 document.getElementById("save-position-btn").addEventListener("click", function (e) {
     chrome.runtime.sendMessage(position);
+    
 })

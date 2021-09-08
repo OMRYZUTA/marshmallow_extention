@@ -2,7 +2,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResopnse) => {
     sendResopnse(scrape());
 })
 let job_title = "";
-let job_posting_URL = String(window.location.href);
+let job_posting_URL = window.location.href;
 let position = {};
 
 const scrape = () => {

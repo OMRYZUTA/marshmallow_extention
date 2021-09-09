@@ -1,6 +1,6 @@
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (changeInfo.status === 'complete') {
-    if (String(tab.url).includes('indeed')) {
+    if (String(tab.url).includes('indeed') || String(tab.url).includes('linkedin')) {
       chrome.tabs.sendMessage(tabId, { message: "hi" },
         response => {
           chrome.storage.sync.set({ "position": response }
@@ -16,6 +16,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 }
 )
 chrome.runtime.onMessage.addListener(function (request) {
+  console.log({ request })
   let appProcess = {}
   appProcess["position"] = request;
   appProcess["status"] = { name: "Interested" };

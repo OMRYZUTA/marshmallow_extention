@@ -9,7 +9,7 @@ const scrape = () => {
     if (job_posting_URL.includes("indeed")) {
         if (job_posting_URL.includes("vjk") || job_posting_URL.includes("vjs")) {
             job_title = document.getElementsByClassName("jobsearch-JobInfoHeader-title")[0]?.innerText.replace("- job post", "");
-            if (typeof job_title === "undefined") {
+            if (typeof job_title === "undefined") {//incase of not a logged in user
                 job_title = document.getElementById('vjs-jobtitle').innerText
                 company_name = document.getElementById("vjs-cn").innerText;
                 let city = document.getElementById("vjs-loc").innerText
@@ -30,6 +30,24 @@ const scrape = () => {
     }
     else if (job_posting_URL.includes("linkedin")) {
         console.log("in linkedin");
+        let jobDescriptionCollection = document.getElementsByClassName("jobs-unified-top-card__content--two-pane");
+        if (jobDescriptionCollection.length > 0) {
+            let job_description_div = jobDescriptionCollection[0];
+            let job_title = job_description_div.getElementsByTagName("a")[0].innerText;
+            console.log(job_title);
+            let company_nameDiv = job_description_div.getElementsByTagName("div")[0];
+            let company_name = company_nameDiv.getElementsByTagName("span")[1].innerText;
+            console.log(company_name);
+            position = { job_title, company_name, job_posting_URL };
+        }
+        else {//incase of not a logged in user - single page application- need to set interval...
+            jobDescriptionCollection = document.getElementsByClassName("top-card-layout__card");
+            console.log(document.getElementsByClassName("top-card-layout__card").length);
+            if (jobDescriptionCollection.length > 0) {
+                console.log(jobDescriptionCollection[0]);
+            }
+        }
+
     }
     return position;
 }
